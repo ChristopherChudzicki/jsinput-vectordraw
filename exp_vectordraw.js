@@ -200,7 +200,7 @@ VectorDraw.prototype.renderVector = function(idx, coords) {
     // it only works when set explicitly with setAttribute.
     tip.setAttribute({labelColor: style.labelColor});
 
-    var line_type = vec.type === 'segment' ? 'segment' : 'arrow';
+    var line_type = vec.type === undefined ? 'arrow' : vec.type;
     var line = this.board.create(line_type, [tail, tip], {
         name: vec.name,
         strokeWidth: style.width,
