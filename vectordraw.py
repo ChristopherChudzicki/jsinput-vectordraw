@@ -130,6 +130,16 @@ def check_segment_angle(check, vectors):
             _angle_within_tolerance(vec.opposite(), expected, tolerance)):
         return _errmsg('The angle of {name} is incorrect. Your angle: {angle:.1f}', check, vectors)
 
+def check_through(check,vectors):
+    vec = vectors[check['vector']]
+    point = check.get('through')
+    point = Point(point[0],point[1])
+    tolerance = check.get('tolerance', 1.0)
+    slope = (vec.tip.y-vec.tail.y)/(vec.tip.x-vec.tail.x)
+    y_intercept = vec.tail.y - slope*vec.tail.x
+    min_dist = abs(slope*point.x-point.y+y_intercept)/math.sqrt(slope**2+y_intercept**2)
+    return min_dist < tolerance
+    
 
 class Point(object):
     def __init__(self, x, y):
@@ -164,6 +174,7 @@ class Grader(object):
         'angle': check_angle,
         'segment_angle': check_segment_angle,
         'segment_coords': check_segment_coords,
+        'through':check_through
     }
 
     def __init__(self, success_message='Test passed', custom_checks=None):
