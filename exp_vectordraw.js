@@ -185,7 +185,7 @@ VectorDraw.prototype.renderVector = function(idx, coords) {
         fillColor: style.pointColor,
         strokeColor: style.pointColor,
         withLabel: false,
-        fixed: (vec.type !== 'segment'),
+        fixed: (vec.type === undefined | vec.type==='arrow' ),
         showInfoBox: false
     });
     var tip = this.board.create('point', coords[1], {
@@ -315,7 +315,7 @@ VectorDraw.prototype.updateVectorProperties = function(vector) {
 };
 
 VectorDraw.prototype.isVectorTailDraggable = function(vector) {
-    return vector.elType === 'segment';
+    return vector.elType !== 'arrow';
 };
 
 VectorDraw.prototype.canCreateVectorOnTopOf = function(el) {
