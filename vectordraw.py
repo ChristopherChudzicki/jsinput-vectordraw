@@ -130,16 +130,22 @@ def check_segment_angle(check, vectors):
             _angle_within_tolerance(vec.opposite(), expected, tolerance)):
         return _errmsg('The angle of {name} is incorrect. Your angle: {angle:.1f}', check, vectors)
 
-def check_through(check,vectors):
-    vec = vectors[check['vector']]
-    point = check.get('through')
-    point = Point(point[0],point[1])
-    tolerance = check.get('tolerance', 1.0)
+def _min_dist_within_tolerance(vec,point,tolerance):
+    #Determine line through endpoints of vector
+    #calculate minimum 2D-distance from point to line, and check if less than tolerance
     slope = (vec.tip.y-vec.tail.y)/(vec.tip.x-vec.tail.x)
     y_intercept = vec.tail.y - slope*vec.tail.x
-    min_dist = abs(slope*point.x-point.y+y_intercept)/math.sqrt(slope**2+y_intercept**2)
+    min_dist = abs(slope*point.x-point.y+y_intercept)/math.sqrt(1+slope**2)    
     return min_dist < tolerance
     
+def check_through(check,vectors):
+    vec = vectors[check['vector']]
+    tolerance = check.get('tolerance', 1.0)
+    points = check.get('expected')
+    for point in points:
+        point = Point(point[0],point[1])
+        if not _min_dist_within_tolerance(vec,point,tolerance):
+            return _errmsg('The line {name} does not pass through the correct points.', check, vectors)    
 
 class Point(object):
     def __init__(self, x, y):
@@ -187,7 +193,7 @@ class Grader(object):
             check_fn = self.check_registry[check['check']]
             result = check_fn(check, self._get_vectors(answer))
             if result:
-                return {'ok': False, 'msg': result}
+                return {'ok': False, 'msg': result}    
         return {'ok': True, 'msg': self.success_message}
 
     def cfn(self, e, ans):
