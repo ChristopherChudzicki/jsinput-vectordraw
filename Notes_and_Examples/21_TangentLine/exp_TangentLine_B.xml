@@ -1,0 +1,40 @@
+<problem display_name="Draw Force Diagram">
+<script type="loncapa/python">
+<![CDATA[
+
+import vectordraw
+
+### Custom Checks ###	
+custom_checks = {}
+
+success_message = 'Good job!'
+
+grader = vectordraw.Grader(success_message, custom_checks)
+]]>
+</script>
+
+<p>Using the slope and intercept that you found above, draw the line tangent to the curve in the first quadrant at \(x=1\). Does your answer make sense?</p>
+
+<p><em>Orient your line by dragging its handles; shift your tangent line by dragging the line's center. You may need to try this a few times to get the appropriate angle.</em></p>
+
+
+<customresponse cfn="grader.cfn">
+  <jsinput gradefn="getInput"
+    get_statefn="getState"
+    set_statefn="setState"
+    initial_state='{}'
+    width="800"
+    height="480"
+    html_file="/static/exp_TangentLine_B.html"
+    />
+</customresponse>
+
+<p><strong>Answer:</strong> A line of slope \(\frac{1}{5}\) touching the point \((1,1)\)</p>
+<p><strong>Grader:</strong> Uses two points.</p>
+
+</problem>
+
+
+
+
+
