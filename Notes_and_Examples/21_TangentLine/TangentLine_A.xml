@@ -25,7 +25,7 @@ grader = vectordraw.Grader(success_message, custom_checks)
     initial_state='{}'
     width="800"
     height="480"
-    html_file="/static/exp_TangentLine_A.html"
+    html_file="/static/TangentLine_A.html"
     />
 </customresponse>
 
