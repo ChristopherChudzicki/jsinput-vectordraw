@@ -30,7 +30,7 @@ grader = vectordraw.Grader(success_message, custom_checks)
 </customresponse>
 
 <p><strong>Answer:</strong> A line of slope \(\frac{1}{5}\) touching the point \((1,1)\)</p>
-<p><strong>Grader:</strong> Uses one point and slope.</p>
+<p><strong>Grader:</strong> Uses one point and angle.</p>
 
 </problem>
 
