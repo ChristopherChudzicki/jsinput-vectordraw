@@ -185,7 +185,7 @@ VectorDraw.prototype.renderVector = function(idx, coords) {
         fillColor: style.pointColor,
         strokeColor: style.pointColor,
         withLabel: false,
-        fixed: (vec.type === undefined | vec.type==='arrow' ),
+        fixed: (vec.type === undefined | vec.type==='arrow' | vec.type='vector' ),
         showInfoBox: false
     });
     var tip = this.board.create('point', coords[1], {
@@ -200,7 +200,7 @@ VectorDraw.prototype.renderVector = function(idx, coords) {
     // it only works when set explicitly with setAttribute.
     tip.setAttribute({labelColor: style.labelColor});
 
-    var line_type = vec.type === undefined ? 'arrow' : vec.type;
+    var line_type = (vec.type === undefined | vec.type === 'vector') ? 'arrow' : vec.type;
     var line = this.board.create(line_type, [tail, tip], {
         name: vec.name,
         strokeWidth: style.width,
