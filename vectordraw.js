@@ -310,8 +310,10 @@ VectorDraw.prototype.updateVectorProperties = function(vector) {
         angle += 360;
     }
     $('.vector-prop-name .value', this.element).html(vector.point2.name); // labels are stored as point2 names
-    $('.vector-prop-length .value', this.element).html(length.toFixed(2) + ' ' + length_units);
-    $('.vector-prop-angle .value', this.element).html(angle.toFixed(2));
+    if (vector.elType!=="line"){
+        $('.vector-prop-length .value', this.element).html(length.toFixed(2) + ' ' + length_units);
+        $('.vector-prop-angle .value', this.element).html(angle.toFixed(2));
+    }
 };
 
 VectorDraw.prototype.isVectorTailDraggable = function(vector) {
