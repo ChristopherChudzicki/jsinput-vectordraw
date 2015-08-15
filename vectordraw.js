@@ -185,7 +185,7 @@ VectorDraw.prototype.renderVector = function(idx, coords) {
         fillColor: style.pointColor,
         strokeColor: style.pointColor,
         withLabel: false,
-        fixed: (vec.type === undefined | vec.type==='arrow' | vec.type='vector' ),
+        fixed: (vec.type === undefined | vec.type==='arrow' | vec.type==='vector' ),
         showInfoBox: false
     });
     var tip = this.board.create('point', coords[1], {
