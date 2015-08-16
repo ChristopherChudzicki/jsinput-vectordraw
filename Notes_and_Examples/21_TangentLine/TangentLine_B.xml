@@ -13,7 +13,9 @@ grader = vectordraw.Grader(success_message, custom_checks)
 ]]>
 </script>
 
-<p>Using the slope and intercept that you found above, draw the line tangent to the curve in the first quadrant at \(x=1\). Does your answer make sense?</p>
+<p>Below is a graph of the curve defined implicitly by \(y^4+xy=x^3-x+2\).</p>
+
+<p>Determine the slope of this curve at the point in the 1st quadrant whose \(x\)-value is \(x=1\), then the line tangent to the curve at this point.</p>
 
 <p><em>Orient your line by dragging its handles; shift your tangent line by dragging the line's center. You may need to try this a few times to get the appropriate angle.</em></p>
 
@@ -25,7 +27,7 @@ grader = vectordraw.Grader(success_message, custom_checks)
     initial_state='{}'
     width="800"
     height="480"
-    html_file="/static/TangentLine_B.html"
+    html_file="/static/TangentLine_A.html"
     />
 </customresponse>
 

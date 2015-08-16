@@ -1,0 +1,40 @@
+%!TEX TS-options = --shell-escape
+%!TEX program=xelatex
+\documentclass[border=0pt]{standalone}
+%requires gnuplot to be installed. 
+\usepackage{mathspec}
+\setallmainfonts{Times New Roman}
+\usepackage{pgfplots}
+
+\begin{document}
+
+\LARGE
+
+\begin{tikzpicture}
+  \begin{axis}[
+      axis lines=middle,
+      axis line style = {very thick},
+      xlabel = {\huge $x$},
+      ylabel = {\huge $y$},
+      xmin=-5.5,
+      xmax=5.5,
+      ymin=-5.5,
+      ymax=5.5,
+      xtick = {-5,-4,...,5},
+      grid=both,
+      major grid style = {very thick},
+      unit vector ratio = 1.375,
+      width=550bp
+      ]
+    \addplot+[ultra thick,mark=none, red] function[raw gnuplot] {
+      set contour base;
+      set cntrparam levels discrete 0.0;
+      unset surface;
+      set view map;
+      set isosamples 500;
+      splot y^4+x*y-x^3+x-2;
+    };
+  \end{axis}
+\end{tikzpicture}
+
+\end{document}

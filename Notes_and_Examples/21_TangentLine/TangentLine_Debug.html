@@ -19,13 +19,12 @@
                   src: "TangentLine_Background.svg",
                   width: 22
               },
-              
               vectors: [
-                  {name: 'Tangent', type:"line", description: 'Tangent Line', length: 3.0, angle: 57.5, tail: [0.0,0.4], render: false,
+                  {name: 'Tangent', type:"segment", description: 'Tangent Line', length: 3.0, angle: 57.5, tail: [0.0,0.4], render: false,
                            style:{color:"DodgerBlue", width:"2"}},
               ],
               expected_result: {
-                  'Tangent': {segment_angle: 8.05, segment_angle_tolerance: 1.0, segment_angle_errmsg: "Are you sure that your tangent line has the correct slope?",through:[[2.06,1.45]],through_tolerance:0.2,through_errmsg:"Your slope looks good, but is your tangent line touching the curve at the appropriate point?"},         
+                  'Tangent': {through:[[2.05,2.00],[-7.6,0.1]],through_tolerance:0.2,through_errmsg:"Your slope looks good, but is your tangent line touching the curve at the appropriate point?"},         
               }
           };
         </script>
