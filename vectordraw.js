@@ -63,6 +63,9 @@ VectorDraw.prototype.template = _.template([
     '        <div class="vector-prop-angle">',
     '          angle: <span class="value">-</span>&deg;',
     '        </div>',
+    '        <div class="vector-prop-slope" style="display:none">',
+    '          slope: <span class="value">-</span>',
+    '        </div>',
     '      </div>',
     '    <% } %>',
     '</div>'
@@ -313,6 +316,11 @@ VectorDraw.prototype.updateVectorProperties = function(vector) {
     if (vector.elType!=="line"){
         $('.vector-prop-length .value', this.element).html(length.toFixed(2) + ' ' + length_units);
         $('.vector-prop-angle .value', this.element).html(angle.toFixed(2));
+    }
+    else if (vector.elType=="line"){
+        $('.vector-prop-length', this.element).hide();
+        $('.vector-prop-angle', this.element).hide();
+        $('.vector-prop-slope', this.element).show();
     }
 };
 
