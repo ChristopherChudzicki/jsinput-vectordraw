@@ -1,0 +1,35 @@
+%!TEX program=xelatex
+\documentclass[border=0pt]{standalone}
+%requires gnuplot to be installed. 
+\usepackage{mathspec}
+\setallmainfonts{Times New Roman}
+\usepackage{pgfplots}
+
+\begin{document}
+
+\LARGE
+
+\begin{tikzpicture}
+  \begin{axis}[
+      smooth,
+      axis lines=middle,
+      axis line style = {very thick},
+      xlabel = {\huge $t$},
+      ylabel = {\huge $v$},
+      xmin=-0.5,
+      xmax=3.5,
+      ymin=-4,
+      ymax=4,
+      xtick = {0,0.5,1.0,1.5,2.0,2.5,3.0},
+      minor x tick num = 1,
+      minor y tick num = 1,
+      grid=both,
+      major grid style = {very thick},
+      unit vector ratio = 2.75,
+      width=550bp
+      ]
+    \addplot+[samples=100,ultra thick,mark=none, red] {1.7*cos(deg(x))};
+  \end{axis}
+\end{tikzpicture}
+
+\end{document}

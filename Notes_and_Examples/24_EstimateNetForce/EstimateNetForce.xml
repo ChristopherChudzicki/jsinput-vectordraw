@@ -1,0 +1,18 @@
+<problem display_name="Draw Force Diagram">
+
+<p>The velocity vs. time graph for a cart \(2.0 \,\text{kg}\) cart is shown below. Approximately, what is the net force on the cart? <em>You can draw on the graph.</em></p>
+
+<numericalresponse answer="-2.86">
+    <text>\(F_{\text{net}}=\)</text>
+    <responseparam type="tolerance" default="0.15" />
+    <textline  inline="1" label="value of net force" trailing_text="newtons" />
+</numericalresponse>
+
+<iframe width="800px" height="450px" seamless="seamless" src="/static/EstimateNetForce.html"></iframe>
+
+<h3>Note:</h3>
+<ul>
+    <li>This problem is graded as numerical response. <code>VectorDraw</code> is used only as a tool by students in answering the numerical response problem.</li>
+</ul>
+
+</problem>
