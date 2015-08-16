@@ -38,7 +38,11 @@ grader = vectordraw.Grader(success_message, custom_checks)
     <textline inline="true" label="initial velocity" trailing_text="\(\text{m}/\text{s}\)" />
 </numericalresponse>
 
-<p>(Note: if this problem were used in a real course, followup questions should be placed in a separate block and the red point graders should be removed.)</p>
+<p>Notes:</p>
+<ul>
+    <li>Slope can be hidden using <code>show_slope_for_lines=false</code></li>
+    <li>If this problem were used in a real course, followup questions should be placed in a separate block and the red point graders should be removed.</li>
+</ul>
 
 <h3>About Grading</h3>
 <p>This problem checks that the best fit line approximately goes through two specific points. The acceptable range of best fit lines is roughly indicated by the pairs of red dots.</p>

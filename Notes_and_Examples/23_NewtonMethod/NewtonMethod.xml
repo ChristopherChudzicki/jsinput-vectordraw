@@ -1,0 +1,40 @@
+<problem display_name="Draw Force Diagram">
+<script type="loncapa/python">
+<![CDATA[
+
+import vectordraw
+
+### Custom Checks ###	
+custom_checks = {}
+
+success_message = 'You might be correct, I have no idea!'
+
+grader = vectordraw.Grader(success_message, custom_checks)
+]]>
+</script>
+
+<p>Below is a graph of the function \(y(x) =\sin(x)\). Your goal is to find the first positive zero of this function using Newton's method. Recall that Newton's method is an iterative approach to finding the zeros of a function using tangent line approximations.</p>
+
+<p>Starting from an initial guess \(x_0=0.5\), draw the first two tangent lines used in Newton's method and determine the next two approximations for the root.</p>
+
+<customresponse cfn="grader.cfn">
+  <jsinput gradefn="getInput"
+    get_statefn="getState"
+    set_statefn="setState"
+    initial_state='{}'
+    width="800"
+    height="500"
+    html_file="/static/NewtonMethod.html"
+    />
+</customresponse>
+
+<h3>Notes:</h3>
+<ul>
+    <li>The grader will always mark you as correct.</li>
+    <li>Grading this problem is currently infeasible, I think—too large a range of acceptable slopes. If the background image were a JSXGraph board, I could check the student's answer is self-consistent.</li>
+    <li>Would be great to add points at \(x_1\) and \(x_2\).</li>
+</ul>
+
+
+
+</problem>
