@@ -15,7 +15,7 @@ var VectorDraw = function(element_id, settings) {
         points: [],
         expected_result: {},
         custom_checks: [],
-        slope_for_lines:false,
+        show_slope_for_lines:false,
         unit_vector_ratio:1
     };
 
@@ -324,7 +324,7 @@ VectorDraw.prototype.updateVectorProperties = function(vector) {
         $('.vector-prop-length', this.element).hide();
         $('.vector-prop-angle', this.element).hide();
     }
-    if (vector.elType==="line" & this.settings.slope_for_lines){
+    if (vector.elType==="line" & this.settings.show_slope_for_lines){
         $('.vector-prop-slope', this.element).show();
         $('.vector-prop-slope .value', this.element).html(slope.toFixed(2));
     }
