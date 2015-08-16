@@ -54,7 +54,7 @@ supports these properties:
   (defaults to `false`).
 * `show_vector_properties`: Show the vector properties box (defaults
   to `true`).
-* `show_slope_for_lines`: If `true`, then for objects with `type=line` a slope is shown (defaults to `false`). If set to true, be sure that `unit_vector_ratio` is set appropriately. 
+* `show_slope_for_lines`: If `true`, then for objects with `type=line` a slope is shown (defaults to `false`). If set to `true`, be sure that `unit_vector_ratio` is set appropriately. 
 * `unit_vector_ratio`: A multiplicative factor for translating slopes from VectorDraw coordinates to the background image coordinates; its value should be `horizontal_unit_vector/vertical_unit_vector`. (Defaults to `1`). 
 * `add_vector_label`: Sets the text displayed on the add-vector button
   (defaults to `'Add Selected Force'`).
