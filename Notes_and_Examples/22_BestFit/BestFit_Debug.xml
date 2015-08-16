@@ -1,0 +1,28 @@
+<problem display_name="Draw Force Diagram">
+<script type="loncapa/python">
+<![CDATA[
+def debug(e,a):
+    return {'ok':True,'msg':str(a)}
+]]>
+</script>
+
+<p>This grader spits out student state, just to help with debugging and setting up the real graders. (Also, this uses segment so that angle is displayed.)</p>
+
+<customresponse cfn="debug">
+  <jsinput gradefn="getInput"
+    get_statefn="getState"
+    set_statefn="setState"
+    initial_state='{}'
+    width="800"
+    height="480"
+    html_file="/static/BestFitLine.html"
+    />
+</customresponse>
+
+</problem>
+
+
+
+
+
+

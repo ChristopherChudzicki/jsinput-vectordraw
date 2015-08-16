@@ -1,0 +1,46 @@
+<problem display_name="Draw Force Diagram">
+<script type="loncapa/python">
+<![CDATA[
+
+import vectordraw
+
+### Custom Checks ###	
+custom_checks = {}
+
+success_message = 'Good job!'
+
+grader = vectordraw.Grader(success_message, custom_checks)
+]]>
+</script>
+
+<p>The velocity of a car is measured at several different times and the recorded data are plotted below. Draw a best fit line to approximate these data, and determine the car's acceleration and its velocity at time \(t=0\).)</p>
+
+<customresponse cfn="grader.cfn">
+  <jsinput gradefn="getInput"
+    get_statefn="getState"
+    set_statefn="setState"
+    initial_state='{}'
+    width="800"
+    height="500"
+    html_file="/static/BestFitLine.html"
+    />
+</customresponse>
+
+<numericalresponse answer="-5.8">
+    <text>\(a=\)</text>
+    <responseparam type="tolerance" default="1.0" />
+    <textline inline="true" label="acceleration" trailing_text="\(\text{m}/\text{s}^2\)" />
+</numericalresponse>
+
+<numericalresponse answer="68.7">
+    <text>\(v_0=\)</text>
+    <responseparam type="tolerance" default="6.0" />
+    <textline inline="true" label="initial velocity" trailing_text="\(\text{m}/\text{s}\)" />
+</numericalresponse>
+
+<p>(Note: if this problem were used in a real course, followup questions should be placed in a separate block and the red point graders should be removed.)</p>
+
+<h3>About Grading</h3>
+<p>This problem checks that the best fit line approximately goes through two specific points. The acceptable range of best fit lines is roughly indicated by the pairs of red dots.</p>
+
+</problem>

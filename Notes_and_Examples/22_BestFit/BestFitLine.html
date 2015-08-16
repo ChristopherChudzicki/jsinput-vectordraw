@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="https://dnextinteractives.s3.amazonaws.com/Physics/JS/vectordraw.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body>
+        <div id="vectordraw" />
+        <script type="text/javascript">
+          // Background image, vectors, and points are defined below.
+          var vectordraw_settings = {
+              width: 550,
+              height24: 400,
+              bounding_box_size: 8,
+			  add_vector_label: "Add Line",
+			  vector_properties_label: "Line Properties",
+              background: {
+                  src: "BestFit_Background.svg",
+                  width: 22
+              },
+              show_slope_for_lines:true,
+              unit_vector_ratio:9.166666,
+              points: [{name: 'p1_min', coords: [-5.52,2.58], style:{color:'DodgerBlue'}},
+                       {name: 'p1_max', coords: [-5.52,3.18], style:{color:'DodgerBlue'}},
+                       {name: 'p2_min', coords: [6.91,-4.49], style:{color:'DodgerBlue'}},
+                       {name: 'p2_max', coords: [6.91,-5.09], style:{color:'DodgerBlue'}},
+              ],
+              vectors: [
+                  {name: 'Best Fit', type:"line", description: 'Best Fit Line', length: 3.0, angle: 57.5, tail: [0.0,0.4], render: false,
+                           style:{color:"DodgerBlue", width:"2"}},
+              ],
+              expected_result: {
+                  'Best Fit': {through:[[-5.52,2.88],[6.91,-4.79]],through_tolerance:0.3,through_errmsg:"Make sure your best fit line goes through the data, with some data above and some below. "},
+              }
+          };
+        </script>
+
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>
+        <script type="text/javascript" src="vectordraw.js"></script>
+    </body>
+</html>
