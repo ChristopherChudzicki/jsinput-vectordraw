@@ -14,7 +14,9 @@ var VectorDraw = function(element_id, settings) {
         vectors: [],
         points: [],
         expected_result: {},
-        custom_checks: []
+        custom_checks: [],
+        slope_for_lines:false,
+        unit_vector_ratio:1
     };
 
     this.board = null;
@@ -308,6 +310,8 @@ VectorDraw.prototype.updateVectorProperties = function(vector) {
         x2 = vector.point2.X(),
         y2 = vector.point2.Y();
     var length = length_factor * Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
+    var slope = (y2-y1)/(x2-x1) * this.settings.unit_vector_ratio;
+    console.log([y2,y1,x2,x1]);
     var angle = ((Math.atan2(y2-y1, x2-x1)/Math.PI*180) - base_angle) % 360;
     if (angle < 0) {
         angle += 360;
@@ -320,7 +324,10 @@ VectorDraw.prototype.updateVectorProperties = function(vector) {
     else if (vector.elType=="line"){
         $('.vector-prop-length', this.element).hide();
         $('.vector-prop-angle', this.element).hide();
+    }
+    if (vector.elType==="line" & this.settings.slope_for_lines){
         $('.vector-prop-slope', this.element).show();
+        $('.vector-prop-slope .value', this.element).html(slope.toFixed(2));
     }
 };
 
