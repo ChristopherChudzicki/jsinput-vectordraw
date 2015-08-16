@@ -1,0 +1,36 @@
+%!TEX program=xelatex
+\documentclass[border=0pt]{standalone}
+%requires gnuplot to be installed. 
+\usepackage{mathspec}
+\setallmainfonts{Times New Roman}
+\usepackage{pgfplots}
+
+\begin{document}
+
+\LARGE
+
+\begin{tikzpicture}
+  \begin{axis}[
+      smooth,
+      axis lines=middle,
+      axis line style = {very thick},
+      xlabel = {\huge $x$},
+      ylabel = {\huge $y$},
+      xmin=-0.25,
+      xmax=2.75,
+      ymin=-1.5,
+      ymax=1.5,
+      xtick = {-0.4,0,0.4,0.8,1.2,1.6,2.0,2.4},
+      ytick = {-1.25,-1.0,...,1.25},
+      minor x tick num=3,
+      grid=both,
+      major grid style = {very thick},
+      unit vector ratio = 1.375,
+      width=550bp
+      ]
+    \addplot+[samples=100,ultra thick,mark=none, red] {cos(deg(x))};
+    \draw[fill=blue] (axis cs: 0.5,0) circle[radius=4bp] node[above] {$x_0$};
+  \end{axis}
+\end{tikzpicture}
+
+\end{document}
