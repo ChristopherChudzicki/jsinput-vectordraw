@@ -312,7 +312,7 @@ VectorDraw.prototype.updateVectorProperties = function(vector) {
     if (angle < 0) {
         angle += 360;
     }
-    $('.vector-prop-name .value', this.element).html(vector.point2.name); // labels are stored as point2 names
+    $('.vector-prop-name .value', this.element).html(vector.name); // labels are stored as point2 names
     $('.vector-prop-length .value', this.element).html(length.toFixed(2) + ' ' + length_units);
     $('.vector-prop-angle .value', this.element).html(angle.toFixed(2));
 };
