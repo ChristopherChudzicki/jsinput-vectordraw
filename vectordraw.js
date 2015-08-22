@@ -15,7 +15,7 @@ var VectorDraw = function(element_id, settings) {
         points: [],
         expected_result: {},
         custom_checks: [],
-        draw: function(board){board}
+        drawOnBoard: function(board){},
     };
 
     this.board = null;
@@ -89,7 +89,7 @@ VectorDraw.prototype.createBoard = function() {
         showNavigation: this.settings.show_navigation
     });
     
-    this.board =  this.settings.draw(this.board);
+    this.settings.drawOnBoard(this.board);
 
     function getImageRatio(bg, callback) {
         $('<img/>').attr('src', bg.src).load(function(){

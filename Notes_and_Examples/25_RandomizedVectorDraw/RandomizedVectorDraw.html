@@ -9,13 +9,25 @@
         <div id="vectordraw" />
         <script type="text/javascript">
         function updateBoard(brd){
-            brd.create('functiongraph', [
-		        function(t){ return Math.sin(Math.PI*t/4); },0, 10],
-                {
-                    strokeColor: "red",
-                    strokeWidth: 2
-		        }
-            );
+            var axisX = brd.create('axis', [[0, 0], [1, 0]], {
+                withLabel: true, name: "x",
+                label: {
+                    position:'rt',
+                    anchorX: 'right',
+                    anchorY: 'bottom'
+                }
+            }); 
+            var axisY = brd.create('axis', [[0, 0], [0, 1]], {
+                withLabel: true, name: "y",
+                label: {
+                    position:'rt',
+                    anchorX:'left',
+                    anchorY:'top'
+                }
+            });
+            brd.create('point',[-1,1], {name:'tipA',size:0});
+            brd.create('point',[2,-1], {name:'tailA',size:0});
+            brd.create('arrow',["tipA","tailA"], {strokeColor:'blue',strokeWidth:2});
         }
         
         
@@ -28,7 +40,7 @@
                 src: '',
                 width: 20
             },
-            draw:updateBoard,
+            drawOnBoard:updateBoard,
             vectors: [
                 {
                     name: 'A+B', description: 'Vector A+B', coords: [[2, 2], [7, 8]], render: false
