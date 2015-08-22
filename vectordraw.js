@@ -295,7 +295,7 @@ VectorDraw.prototype.getVectorForObject = function(obj) {
 VectorDraw.prototype.getVectorSettingsByName = function(name) {
     return _.find(this.settings.vectors, function(vec) {
         return vec.name === name;
-    });
+    }) || {};
 };
 
 VectorDraw.prototype.updateVectorProperties = function(vector) {
