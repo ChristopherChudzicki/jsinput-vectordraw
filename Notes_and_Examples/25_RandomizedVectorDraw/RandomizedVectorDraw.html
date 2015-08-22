@@ -8,25 +8,37 @@
     <body>
         <div id="vectordraw" />
         <script type="text/javascript">
-          // Background image, vectors, and points are defined below.
-          var vectordraw_settings = {
-              width: 550,
-              height: 450,
-              bounding_box_size: 8,
-              background: {
-                  src: '',
-                  width: 20
-              },
-              vectors: [
-                    {
-                        name: 'A+B', description: 'Vector A+B', coords: [[2, 2], [7, 8]], render: false
-                    },
-              ],
-              points: [{name: 'cm', coords: [0, -4.8]}],
-              expected_result: {
-                 'A+B': {angle: 31, angle_tolerance: 1, tail: [0, -4.8], tail_tolerance: 0.25},
-              }
-          };
+        function updateBoard(brd){
+            brd.create('functiongraph', [
+		        function(t){ return Math.sin(Math.PI*t/4); },0, 10],
+                {
+                    strokeColor: "red",
+                    strokeWidth: 2
+		        }
+            );
+        }
+        
+        
+        // Background image, vectors, and points are defined below.
+        var vectordraw_settings = {
+            width: 550,
+            height: 450,
+            bounding_box_size: 8,
+            background: {
+                src: '',
+                width: 20
+            },
+            draw:updateBoard,
+            vectors: [
+                {
+                    name: 'A+B', description: 'Vector A+B', coords: [[2, 2], [7, 8]], render: false
+                },
+            ],
+            points: [{name: 'cm', coords: [0, -4.8]}],
+            expected_result: {
+                'A+B': {angle: 31, angle_tolerance: 1, tail: [0, -4.8], tail_tolerance: 0.25},
+            }
+        };
         </script>
 
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js"></script>
