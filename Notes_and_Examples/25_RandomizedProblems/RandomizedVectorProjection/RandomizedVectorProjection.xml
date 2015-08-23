@@ -2,7 +2,7 @@
 <script type="loncapa/python">
 <![CDATA[
 seed = random.seed
-html_file= "/static/RandomizedVectorDraw.html?seed=SEED".replace("SEED",str(seed))
+html_file= "/static/RandomizedVectorProjection.html?seed=SEED".replace("SEED",str(seed))
 import vectordraw
 grader = vectordraw.Grader()
 ]]>
