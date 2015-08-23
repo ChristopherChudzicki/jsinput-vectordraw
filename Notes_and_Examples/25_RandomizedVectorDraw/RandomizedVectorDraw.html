@@ -8,27 +8,79 @@
     <body>
         <div id="vectordraw" />
         <script type="text/javascript">
-        function updateBoard(brd){
-            var axisX = brd.create('axis', [[0, 0], [1, 0]], {
-                withLabel: true, name: "x",
-                label: {
-                    position:'rt',
-                    anchorX: 'right',
-                    anchorY: 'bottom'
-                }
-            }); 
-            var axisY = brd.create('axis', [[0, 0], [0, 1]], {
-                withLabel: true, name: "y",
-                label: {
-                    position:'rt',
-                    anchorX:'left',
-                    anchorY:'top'
-                }
-            });
-            brd.create('point',[-1,1], {name:'tipA',size:0});
-            brd.create('point',[2,-1], {name:'tailA',size:0});
-            brd.create('arrow',["tipA","tailA"], {strokeColor:'blue',strokeWidth:2});
+        Array.prototype.vectorAdd = function(other) {
+            var result = []
+            for(var i = 0; i < this.length; i++) {
+                result.push( this[i] + other[i])
+            }
+            return result
         }
+        Array.prototype.vectorMag = function() {
+            var result = 0
+            for(var i = 0; i < this.length; i++) {
+                result += this[i]*this[i]
+            }
+            return Math.sqrt(result)
+        }
+        Array.prototype.vectorAngle = function() {
+            var result = (this.length !== 2) ? undefined : Math.atan2(this[1],this[0])*180/Math.PI;
+            return result
+        }
+		randomInteger = function(min,max){
+		    return Math.floor((Math.random()*(max-min)) + min);
+		}
+		randomFloat = function(min,max){
+		    return (Math.random()*(max-min)) + min;
+		}
+        polarToRect = function(mag,angle){
+            return [mag*Math.cos(angle*Math.PI/180),mag*Math.sin(angle*Math.PI/180)]
+        }
+        
+        //Get two random vectors
+        var magA = randomInteger(3,6),
+            angleA = randomInteger(0,360),
+            magB = randomInteger(3,6),
+            angleB = angleA + randomInteger(20,340);
+
+        //Avoid vectors that are almost exactly opposite
+        while (Math.abs(magA-magB) < 1 && Math.abs(angleA-angleB) < 40){
+            magB = randomInteger(3,6);
+        }
+    
+        var vecA = polarToRect(magA,angleA)
+            vecB = polarToRect(magB,angleB),
+            tailA = [randomFloat(-4,4) - vecA[0],randomFloat(-4,4) - vecA[1] ],
+            tailB = [randomFloat(-4,4) - vecB[0],randomFloat(-4,4) - vecB[1] ];
+        
+        //Calculate C=A+B vector magnitude and angle
+        var vecC = vecA.vectorAdd(vecB),
+            magC = vecC.vectorMag(),
+            angleC = vecC.vectorAngle();
+        
+        updateBoard = function (brd){
+        
+            JXG.Board.prototype.createVector = function(shape,settings){
+                //This function draws vector that can be translated but not scaled or rotated.
+                // shape={tail:[x,y],magnitude:float,angle:degrees}
+                defaultSettings = {
+                    strokeWidth:4,
+                    label:{fontSize:18},
+                }
+                var settings = (settings===undefined) ? settings = defaultSettings : settings = _.extend(defaultSettings, settings)
+                //Calculate rectangular coordinates of tip
+                shape.angle = shape.angle*Math.PI/180;
+                shape.tip = [shape.tail[0]+shape.magnitude*Math.cos(shape.angle),shape.tail[1]+shape.magnitude*Math.sin(shape.angle)]
+                //Draw vector
+                var vec = this.create('arrow',[shape.tail,shape.tip],settings);
+                var vecPhantomLabel = brd.create('point',[function(){return vec.point2.X()},function(){return vec.point2.Y()}],{name:vec.name,label:{fontSize:settings.label.fontSize},fillOpacity:0,strokeOpacity:0,highlightFillOpacity:0,highlightStrokeOpacity:0,showInfobox:false})
+
+                return vec
+    		}
+        
+            var A = brd.createVector({tail:tailA,magnitude:magA,angle:angleA},{color:'blue',name:'A'});
+            var B = brd.createVector({tail:tailB,magnitude:magB,angle:angleB},{color:'red',name:'B'});
+        }
+        
         
         
         // Background image, vectors, and points are defined below.
@@ -43,12 +95,11 @@
             drawOnBoard:updateBoard,
             vectors: [
                 {
-                    name: 'A+B', description: 'Vector A+B', coords: [[2, 2], [7, 8]], render: false
+                    name: 'A+B', description: 'Vector A+B', coords: [[2, 2], [7, 8]], render: false,style:{color:'purple'}
                 },
             ],
-            points: [{name: 'cm', coords: [0, -4.8]}],
             expected_result: {
-                'A+B': {angle: 31, angle_tolerance: 1, tail: [0, -4.8], tail_tolerance: 0.25},
+                'A+B': {angle: angleC, angle_tolerance: 4,length:magC,length_tol:0.05*magC},
             }
         };
         </script>
