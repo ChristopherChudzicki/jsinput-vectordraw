@@ -22,12 +22,29 @@
             }
             return result
         }
-        Array.prototype.vectorMag = function() {
+        Array.prototype.vectorSub = function(other) {
+            var result = []
+            for(var i = 0; i < this.length; i++) {
+                result.push( this[i] - other[i])
+            }
+            return result
+        }
+        Array.prototype.scalarMult = function(other) {
+            var result = []
+            for(var i = 0; i < this.length; i++) {
+                result.push( this[i]*other)
+            }
+            return result
+        }
+        Array.prototype.vectorDot = function(other) {
             var result = 0
             for(var i = 0; i < this.length; i++) {
-                result += this[i]*this[i]
+                result += this[i]*other[i]
             }
-            return Math.sqrt(result)
+            return result
+        }
+        Array.prototype.vectorMag = function() {
+            return Math.sqrt( this.vectorDot(this) )
         }
         Array.prototype.vectorAngle = function() {
             var result = (this.length !== 2) ? undefined : Math.atan2(this[1],this[0])*180/Math.PI;
@@ -50,8 +67,8 @@
             angleB = angleA + randomInteger(20,340);
 
         //Avoid vectors that are almost exactly opposite
-        while (Math.abs(magA-magB) < 1 && Math.abs(angleA-angleB) < 40){
-            magB = randomInteger(3,6);
+        while ( Math.abs(angleA-angleB) < 110 && Math.abs(angleA-angleB) > 70){
+            angleB = angleA + randomInteger(20,340);
         }
     
         var vecA = polarToRect(magA,angleA)
@@ -60,9 +77,15 @@
             tailB = [randomFloat(-4,4) - vecB[0],randomFloat(-4,4) - vecB[1] ];
         
         //Calculate C=A+B vector magnitude and angle
-        var vecC = vecA.vectorAdd(vecB),
-            magC = vecC.vectorMag(),
-            angleC = vecC.vectorAngle();
+        var vecAhat = vecA.scalarMult(1/magA),
+            vecBparaA = vecAhat.scalarMult(vecB.vectorDot(vecAhat)),
+            vecBperpA = vecB.vectorSub(vecBparaA),
+            magBparaA = vecBparaA.vectorMag(),
+            angleBparaA = vecBparaA.vectorAngle(),
+            magBperpA = vecBperpA.vectorMag(),
+            angleBperpA = vecBperpA.vectorAngle();
+            
+            console.log([magBparaA,angleBparaA,magBperpA,angleBperpA])
         
         updateBoard = function (brd){
         
@@ -102,11 +125,15 @@
             drawOnBoard:updateBoard,
             vectors: [
                 {
-                    name: 'A+B', description: 'Vector A+B', coords: [[2, 2], [7, 8]], render: false,style:{color:'purple'}
+                    name: 'B_1', description: 'Projection of B onto A', coords: [[2, 2], [7, 8]], render: false,style:{color:'purple'}
+                },
+                {
+                    name: 'B_2', description: 'Projection of B perpendicular to A', coords: [[2, 2], [7, 8]], render: false,style:{color:'purple'}
                 },
             ],
             expected_result: {
-                'A+B': {angle: angleC, angle_tolerance: 4,length:magC,length_tol:0.05*magC},
+                'B_1': {angle: angleBparaA, angle_tolerance: 6,length:magBparaA,length_tol:0.05*magBparaA},
+                'B_2': {angle: angleBperpA, angle_tolerance: 6,length:magBperpA,length_tol:0.05*magBperpA},
             }
         };
         </script>

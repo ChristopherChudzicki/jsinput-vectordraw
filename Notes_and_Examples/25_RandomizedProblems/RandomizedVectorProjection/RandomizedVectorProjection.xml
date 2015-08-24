@@ -7,7 +7,11 @@ import vectordraw
 grader = vectordraw.Grader()
 ]]>
 </script>
-<p>Draw A+B.</p>
+<p>Draw:</p>
+<ul>
+    <li>\(B_1\), the projection of B onto A</li>
+    <li>\(B_2\), the projection of B perpendicular to A</li>
+</ul>
 <customresponse cfn="grader.cfn">
   <jsinput gradefn="getInput"
     get_statefn="getState"
@@ -20,6 +24,12 @@ grader = vectordraw.Grader()
 </customresponse>
 
 <p>Random seed is $seed.</p>
+
+<p>Ideas:</p>
+<ul>
+    <li>This should be preceeded by a version in which the angle between A and B is always between 0 and 90.</li>
+    <li>I'd like to do this as a tangential/radial acceleration problem</li>
+</ul>
 
 </problem>
 
