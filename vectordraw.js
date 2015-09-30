@@ -399,8 +399,8 @@ VectorDraw.prototype.updateVectorProperties = function(vector) {
         x2 = vector.point2.X(),
         y2 = vector.point2.Y();
     var length = vec_settings.length_factor * Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
-    var slope = (y2-y1)/(x2-x1);
-    var angle = ((Math.atan2(y2-y1, x2-x1)/Math.PI*180) - vec_settings.base_angle) % 360;
+    var slope = (y2-y1)/(x2-x1) * this.settings.unit_vector_ratio;
+    var angle = ((Math.atan2( (y2-y1) * this.settings.unit_vector_ratio, x2-x1)/Math.PI*180) - vec_settings.base_angle) % 360;
     if (angle < 0) {
         angle += 360;
     }
