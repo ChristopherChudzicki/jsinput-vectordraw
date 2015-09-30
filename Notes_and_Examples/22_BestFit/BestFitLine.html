@@ -24,6 +24,10 @@
               vectors: [
                   {name: 'Best Fit', type:"line", description: 'Best Fit Line', length: 3.0, angle: 57.5, tail: [0.0,0.4], render: false,
                            style:{color:"DodgerBlue", width:"2"}},
+				  {name: 'segment', type:"segment", description: 'segment for testing', coords: [[2, -2], [2, 6]], render: false,
+                           style:{color:"DodgerBlue", width:"7"}},
+				  {name: 'vector', type:"vector", description: 'vector for testing', coords: [[2, -2], [2, 6]], render: false,
+                           style:{color:"DodgerBlue", width:"7"}},
               ],
               expected_result: {
 				  'Best Fit': {points_on_line:[[-4.53,2.20],[5.63,-3.73]],points_on_line_tolerance:0.4}
