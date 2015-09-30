@@ -1,0 +1,29 @@
+<problem display_name="Draw Force Diagram">
+<script type="loncapa/python">
+<![CDATA[
+
+import vectordraw
+
+### Custom Checks ###	
+custom_checks = {}
+
+success_message = 'Good job!'
+
+grader = vectordraw.Grader(success_message, custom_checks)
+]]>
+</script>
+
+<p>The velocity of a car is measured at several different times and the recorded data are plotted below. Draw a best fit line to approximate these data, and determine the car's acceleration and its velocity at time \(t=0\).)</p>
+
+<customresponse cfn="grader.cfn">
+  <jsinput gradefn="getInput"
+    get_statefn="getState"
+    set_statefn="setState"
+    initial_state='{}'
+    width="800"
+    height="500"
+    html_file="/static/BestFitLine.html"
+    />
+</customresponse>
+
+</problem>

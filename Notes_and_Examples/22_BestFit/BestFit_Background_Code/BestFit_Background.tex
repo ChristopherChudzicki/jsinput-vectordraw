@@ -1,0 +1,53 @@
+%!TEX program = xelatex
+\documentclass[border=2pt]{standalone}
+\usepackage{mathspec}
+\setallmainfonts{Times New Roman}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{filecontents}
+
+\begin{document}
+
+%Enter Data Here
+\begin{filecontents}{mydata.dat}
+X Y
+1.5 49.4998
+1.75 47.988
+2 46.6607
+2.25 41.5192
+2.5 42.4842
+2.75 36.8417
+3 30.8046
+3.25 31.6654
+3.5 29.8038
+3.75 24.2898
+4 23.1189
+4.25 17.8382
+4.5 15.6992
+\end{filecontents}
+
+
+\LARGE
+
+\begin{tikzpicture}
+\begin{axis}[axis lines = middle,
+	smooth,
+	xlabel = {\huge $t$~[s]},
+	ylabel = {\huge $v$~[m/s]},
+    xtick = {0,1,...,6},
+    ytick = {0,10,...,80},
+	minor tick num =1,
+	xmin=0,
+	xmax=6,
+    ymin=0,
+    ymax=80,
+	grid=both,
+	width=500bp,
+    major grid style = {very thick},
+    unit vector ratio = 20,
+	]
+   \addplot[only marks,blue] table {mydata.dat};
+\end{axis}
+\end{tikzpicture}
+
+\end{document}
