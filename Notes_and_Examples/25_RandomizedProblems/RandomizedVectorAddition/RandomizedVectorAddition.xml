@@ -1,7 +1,7 @@
 <problem display_name="Randomized Vector Addition">
 <script type="loncapa/python">
 <![CDATA[
-seed = random.seed
+seed = random.random()
 html_file= "/static/RandomizedVectorAddition.html?seed=SEED".replace("SEED",str(seed))
 import vectordraw
 grader = vectordraw.Grader()
