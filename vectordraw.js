@@ -458,7 +458,7 @@ VectorDraw.prototype.onBoardDown = function(evt) {
     var selected = this.getSelectedElement();
     var coords = this.getMouseCoords(evt);
     var targetObjects = this.objectsUnderMouse(coords);
-    if (selected.idx && _.all(targetObjects, this.canCreateVectorOnTopOf.bind(this)) ) {
+    if ( typeof(selected.idx) !== undefined && _.all(targetObjects, this.canCreateVectorOnTopOf.bind(this)) ) {
         var point_coords = [coords.usrCoords[1], coords.usrCoords[2]];
         if (selected.type === 'vector') {
             this.drawMode = true;
