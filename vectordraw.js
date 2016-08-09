@@ -232,14 +232,21 @@ VectorDraw.prototype.removePoint = function(idx) {
 
 VectorDraw.prototype.getVectorCoordinates = function(vec) {
     var coords = vec.coords;
+    var comps = vec.comps;
     if (!coords) {
         var tail = vec.tail || [0, 0];
-        var length = 'length' in vec ? vec.length : 5;
-        var angle = 'angle' in vec ? vec.angle : 30;
-        var radians = angle * Math.PI / 180;
+        if (!comps) {
+            var length = 'length' in vec ? vec.length : 5;
+            var angle = 'angle' in vec ? vec.angle : 30;
+            var radians = angle * Math.PI / 180;
+            comps = [
+                Math.cos(radians) * length,
+                Math.sin(radians) * length
+            ]
+        }
         var tip = [
-            tail[0] + Math.cos(radians) * length,
-            tail[1] + Math.sin(radians) * length
+            tail[0] + comps[0],
+            tail[1] + comps[1]
         ];
         coords = [tail, tip];
     }

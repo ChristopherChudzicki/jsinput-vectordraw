@@ -79,10 +79,11 @@ These are the supported vector properties:
   the vector is to use `tail`, `length`, and `angle`.
 * `tail`: Coorrdinate of the tail point of the vector. Only used if
   `coords` is not given.
-* `length`: The length of the vector. Only used if `coords` is not
+* `comps`: An array containing the x- and y-components of the vector. Only used if `coords` is not given.
+* `length`: The length of the vector. Only used if `coords` and `comps` are not
   given.
 * `angle`: The vector angle. The value should be between `0` and
-  `360`. Only used if `coords` is not given.
+  `360`. Only used if `coords` and `comps` are not given.
 * `render`: Whether this vector should be drawn on the board
   automatically, without the user having to add it from the dropdown.
   Defaults to `false`.
