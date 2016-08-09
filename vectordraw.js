@@ -289,15 +289,19 @@ VectorDraw.prototype.renderVector = function(idx, coords) {
         tip.hideElement();
     }
     var labelPoint  = this.board.create('point', [function(){return tip.X()}, function(){return tip.Y()}], {
-        name: style.label || vec.name,
+        name: vec.name + '-labelPoint',
         withLabel: true,
         size:-1,
         showInfoBox: false
     })
+    // Not sure how to set label text different from name above
+    labelPoint.setLabelText( vec.style.label || vec.name )
     // Not sure why, but including labelColor in attributes above doesn't work,
     // it only works when set explicitly with setAttribute.
     labelPoint.setAttribute({labelColor: style.labelColor});
-
+    // add labelPoint as child of tip, which enables removal later.
+    tip.addChild(labelPoint);
+    
     var line_type = (vec.type === 'vector') ? 'arrow' : vec.type;
     var line = this.board.create(line_type, [tail, tip], {
         name: vec.name,
