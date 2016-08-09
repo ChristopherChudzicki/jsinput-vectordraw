@@ -3,6 +3,7 @@
     <head>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <link href="vectordraw.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js"></script>
         <!-- Default styles can be overriden here -->
         <style type="text/css">
             .jxgboard {
@@ -40,7 +41,7 @@
                         name: 'Line', description: 'Demo Line', type: 'line', render: false
                     },
                     {
-                        name: 'Segment', description: 'Demo Segment', type: 'segment', render: false
+                        name: 'Segment', description: 'Demo Segment', type: 'segment', render: false, coords:[[0,0],[5,0]]
                     }
               ],
               points: [
@@ -59,9 +60,17 @@
                   {check: 'compare_normal_and_gravity_lengths'}
               ]
           };
+
+
+          // DISPLAY THE ANSWER: Append a %-encoded answer to the URL, such as  ?answer=%5B%7B%22tail%22%3A%5B3%2C-1%5D%2C%22name%22%3A%22N%22%7D%2C%7B%22length%22%3A8%2C%22tail%22%3A%5B2%2C0%5D%2C%22angle%22%3A150%2C%22name%22%3A%22Segment%22%7D%2C%7B%22length%22%3A4%2C%22tail%22%3A%5B2%2C-3%5D%2C%22angle%22%3A210%2C%22name%22%3A%22g%22%7D%5D
+          // which corresponds to:
+          // [
+          //     {name: 'N', tail:[3,-1]},
+          //     {name: 'Segment', tail:[2,0], angle: 150, length:8},
+          //     {name: 'g', tail:[2,-3], angle: 210, length:4}
+          // ]
         </script>
 
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>
         <script type="text/javascript" src="vectordraw.js"></script>

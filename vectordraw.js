@@ -16,6 +16,12 @@ var VectorDraw = function(element_id, settings) {
     this.element.on('mousedown', '.jxgboard image', function(evt) { evt.preventDefault(); });
 
     this.render();
+    
+    var queryString = this.getQueryString();
+    if (queryString.answer != undefined){
+        var answer = JSON.parse(queryString.answer);
+        this.displayAnswer(answer);
+    }
 };
 
 VectorDraw.prototype.sanitizeSettings = function(settings) {
@@ -390,6 +396,57 @@ VectorDraw.prototype.redo = function() {
         this.setState(state);
     }
 };
+
+VectorDraw.prototype.getQueryString = function () {
+    // modified from http://stackoverflow.com/a/979995/2747370
+    var query_string = {};
+    var query = window.location.search.substring(1);
+    if (query === ""){
+        return query_string
+    }
+    var vars = query.split("&");
+    for (var i=0;i<vars.length;i++) {
+        var pair = vars[i].split("=");
+        // If first entry with this name
+        if (typeof query_string[pair[0]] === "undefined") {
+            query_string[pair[0]] = decodeURIComponent(pair[1]);
+            // If second entry with this name
+        } else if (typeof query_string[pair[0]] === "string") {
+            var arr = [ query_string[pair[0]],decodeURIComponent(pair[1]) ];
+            query_string[pair[0]] = arr;
+            // If third or later entry with this name
+        } else {
+            query_string[pair[0]].push(decodeURIComponent(pair[1]));
+        }
+    }
+    return query_string;
+}
+
+VectorDraw.prototype.loadAnswer = function(answer) {
+    // Alter this.settings.vectors so that the answer is rendered.
+    for (var j=0; j<answer.length; j++ ){
+        // new settings for vec
+        var answerVec = answer[j];
+        answerVec.render = true;
+        answerVec.fixed = true;
+        
+        // find vec from settings.vectors
+        var settingsVecIdx = _.findIndex( this.settings['vectors'], function(vec){return vec.name === answerVec.name} );
+        var settingsVec = this.settings.vectors[ settingsVecIdx ];
+        // delete coordinates so it can be overriden by answerVec
+        delete settingsVec.coords
+        
+        // update settings.vectors with new settings
+        _.extend(settingsVec,answerVec);
+    }
+};
+
+VectorDraw.prototype.displayAnswer = function(answer){
+    this.loadAnswer(answer);
+    this.render();
+    this.element.children().not('.jxgboard').hide();
+    this.element.css("pointer-events", "none");
+}
 
 VectorDraw.prototype.getMouseCoords = function(evt) {
     var i = evt[JXG.touchProperty] ? 0 : undefined;
