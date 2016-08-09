@@ -1,5 +1,5 @@
 # Please recreate pyton_lib.zip after you modify this file:
-#   zip python_lib.zip vectordraw.py
+# zip python_lib.zip vectordraw.py
 
 ###################
 ### Python API ####
@@ -8,6 +8,7 @@
 import inspect
 import json
 import math
+import urllib
 
 
 ## Built-in check functions
@@ -235,3 +236,22 @@ class Grader(object):
 
     def _get_points(self, answer):
         return {name: Point(*coords) for name, coords in answer['points'].iteritems()}
+
+def answer_url(answer, original_url=""):
+    def round_list(lst, digits=2):
+        lst = list(lst)
+        for index, item in enumerate(lst):
+            try:
+                lst[index] = round(item, digits)
+            except TypeError:
+                 lst[index] = round_list(item)
+        return lst
+    for vec in answer:
+        for key in ['tail', 'coords', 'comps']:
+            try:
+                vec[key] = round_list(vec[key])
+            except KeyError:
+                pass
+    print(answer)
+    query_string = "?answer=" + urllib.quote( json.dumps(answer).replace(' ','') )
+    return original_url + query_string
