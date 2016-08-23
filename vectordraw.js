@@ -8,6 +8,8 @@ var VectorDraw = function(element_id, settings) {
     this.settings = this.sanitizeSettings(settings);
     this.element = $('#' + element_id);
 
+    JXG.Options.text.useMathJax = settings.useMathJax;
+
     this.element.on('click', '.reset', this.reset.bind(this));
     this.element.on('click', '.add-vector', this.addElementFromList.bind(this));
     this.element.on('click', '.undo', this.undo.bind(this));
@@ -501,6 +503,9 @@ VectorDraw.prototype.updateVectorProperties = function(vector) {
         angle += 360;
     }
     $('.vector-prop-name .value', this.element).html(vector.point2.name); // labels are stored as point2 names
+    if (this.settings.useMathJax) {
+        MathJax.Hub.Typeset() //Tell mathjax to typeset additions to page
+    }
     $('.vector-prop-angle .value', this.element).html(angle.toFixed(2));
     if (vector.elType !== "line") {
         $('.vector-prop-length', this.element).show();
